@@ -21,21 +21,20 @@ function load ($name){
     require_once($appDir .DIRECTORY_SEPARATOR . $name);
 }
 
+function user()
+{
+    $user = null;
 
-// Функция логина
-
-//$appDir = realpath(__DIR__ . '/../src');
-
-// Тест
-if ($_SERVER['REQUEST_URI'] == "/") {
-    // Сессии
-    //$user = null;
-    if (!empty($_SESSION["user"]))
-    {
+    if (!empty($_SESSION["user"])) {
         $user = $_SESSION["user"];
     }
 
-    //var_dump($_SERVER['REQUEST_URI']);
+    return $user;
+}
+
+// Тест
+if ($_SERVER['REQUEST_URI'] == "/") {
+
     load('models/User.php');
     load('controllers/UserController.php');
     //load('core/MainController.php');
@@ -43,8 +42,6 @@ if ($_SERVER['REQUEST_URI'] == "/") {
     //load('views/home.php');
     $controllers = new UserController();
     echo $controllers->php();
-    // View
-
 
     return 0;
 }
