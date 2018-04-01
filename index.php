@@ -32,17 +32,47 @@ function user()
     return $user;
 }
 
-// Тест
+// Стартовая страница
 if ($_SERVER['REQUEST_URI'] == "/") {
-
+    user();
     load('models/User.php');
     load('controllers/UserController.php');
-    //load('core/MainController.php');
     load('core/view.php');
-    //load('views/home.php');
     $controllers = new UserController();
-    echo $controllers->php();
+    $controllers->index();
+    return 0;
+}
 
+// Страница регистрации
+if ($_SERVER['REQUEST_URI'] == "/reg.php") {
+    user();
+    load('models/User.php');
+    load('controllers/UserController.php');
+    load('core/view.php');
+    $controllers = new UserController();
+    $controllers->reg();
+    return 0;
+}
+
+// Страница списка пользователей
+if ($_SERVER['REQUEST_URI'] == "/list.php") {
+    user();
+    load('models/User.php');
+    load('controllers/UserController.php');
+    load('core/view.php');
+    $controllers = new UserController();
+    $controllers->list();
+    return 0;
+}
+
+// Страница filelist
+if ($_SERVER['REQUEST_URI'] == "/filelist.php") {
+    user();
+    load('models/User.php');
+    load('controllers/UserController.php');
+    load('core/view.php');
+    $controllers = new UserController();
+    $controllers->filelist();
     return 0;
 }
 

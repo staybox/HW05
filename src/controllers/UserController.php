@@ -3,9 +3,9 @@
 load('core/MainController.php');
 class UserController extends MainController
 {
-    public function php()
+    public function index()
     {
-        echo "PHP".PHP_EOL;
+        //echo "PHP".PHP_EOL;
 
         //$userModel = new User();
         //$users = $userModel; //->getUserList();
@@ -21,6 +21,23 @@ class UserController extends MainController
         print_r($newsList);
         return true;*/
     }
+
+    public function reg()
+    {
+        $this->view->render('reg',[]);
+    }
+
+
+    public function list()
+    {
+        $this->view->render('list',[]);
+    }
+
+    public function filelist()
+    {
+        $this->view->render('filelist',[]);
+    }
+
 /*
     public function actionView($category, $id)
     {
