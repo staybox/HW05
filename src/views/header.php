@@ -36,10 +36,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Авторизация</a></li>
-            <li><a href="reg.php">Регистрация</a></li>
-            <li><a href="list.php">Список пользователей</a></li>
-            <li><a href="filelist.php">Список файлов</a></li>
+            <li <? if($currentPage == "/") {echo "class=\"active\"";} ?>><a href="/">Авторизация</a></li>
+            <li <? if($currentPage == "/reg.php" ) {echo "class=\"active\"";} ?>><a href="reg.php">Регистрация</a></li>
+            <li <? if($currentPage == "/list.php") {echo "class=\"active\"";} ?>><a href="list.php">Список пользователей</a></li>
+            <li <? if($currentPage == "/filelist.php") {echo "class=\"active\"";} ?>><a href="filelist.php">Список файлов</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

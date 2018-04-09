@@ -11,13 +11,15 @@ include_once ("header.php");
           <th>Фотография</th>
           <th>Действия</th>
         </tr>
+          <? foreach ($modelfiles as $key=>$value): ?>
         <tr>
-          <td>1.jpg</td>
-          <td><img src="http://lorempixel.com/people/200/200/" alt=""></td>
+          <td><?=$value['photo_name'];?></td>
+          <td><img src="<?=$value['photo'];?>" alt=""></td>
           <td>
-            <a href="">Удалить аватарку пользователя</a>
+            <a href="?remove_userpic=<?=$value['user_id'];?>">Удалить аватарку пользователя</a>
           </td>
         </tr>
+          <? endforeach; ?>
       </table>
 
     </div><!-- /.container -->

@@ -14,18 +14,19 @@ include_once ("header.php");
           <th>Фотография</th>
           <th>Действия</th>
         </tr>
+          <? foreach ($users as $key=>$value): ?>
         <tr>
-          <td>vasya99</td>
-          <td>Вася</td>
-          <td>14</td>
-          <td>Эксперт в спорах в интернете</td>
-          <td><img src="http://lorempixel.com/people/200/200/" alt=""></td>
+          <td><?=$value['login'];?></td>
+          <td><?=$value['name'];?></td>
+          <td><?=$value['age'];?></td>
+          <td><?=$value['description'];?></td>
+          <td><img src="<?=$value['photo'];?>" alt=""></td>
           <td>
-            <a href="">Удалить пользователя</a>
+            <a href="?remove_user_id=<?=$value['user_id'];?>">Удалить пользователя</a>
           </td>
         </tr>
+          <? endforeach; ?>
       </table>
-
     </div><!-- /.container -->
 
 
