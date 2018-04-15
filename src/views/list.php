@@ -22,7 +22,8 @@ include_once ("header.php");
           <td><?=$value['description'];?></td>
           <td><img src="<?=$value['photo'];?>" alt=""></td>
           <td>
-            <a href="?remove_user_id=<?=$value['user_id'];?>">Удалить пользователя</a>
+              <a href="/edit?edit_user_id=<?=$value['user_id'];?>">Редактировать пользователя</a><br>
+              <a href="?remove_user_id=<?=$value['user_id'];?>">Удалить пользователя</a>
           </td>
         </tr>
           <? endforeach; ?>

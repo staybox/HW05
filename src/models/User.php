@@ -86,7 +86,6 @@ class User
         } else {
             return false;
         }
-        return 0;
     }
 
     public function getFiles()
@@ -98,23 +97,39 @@ class User
         return $filesId;
     }
 
-    public function removePic()
+    public function removePic($userId)
     {
         $sql = "UPDATE `users` SET `PHOTO`= :photo,`PHOTO_NAME`= :photo_name WHERE USER_ID = :user_id";
         $sth = $this->db->prepare($sql);
         $sth->execute(array('user_id' => $_GET['remove_userpic'], 'photo' => null, 'photo_name' => null));
-
-        $sqlCheck = "SELECT photo,photo_name FROM users WHERE user_id = :user_id";
-        $sth2 = $this->db->prepare($sqlCheck);
-        $sth2->execute(array('user_id' => $_GET['remove_userpic']));
-        $userId = $sth2->fetchAll();
-        if ($userId[0]['photo'] === null && $userId[0]['photo_name'] === null) {
-            return true;
-        } else {
-            return false;
-        }
-        return 0;
     }
+
+    public function addUserFromAdmin($data)
+    {
+        $sth = $this->db->prepare("INSERT INTO users(`LOGIN`, `EMAIL`, `PASSWORD`, `NAME`, `AGE`, `DESCRIPTION`, `PHOTO`, `PHOTO_NAME`) VALUES (:login,:email,:password,:name,:age,:desc, :link_photo, :photo_name)");
+        $sth->execute(array(':login' => $data['login'], ':email' => $data['email'], ':password' => $data['password'], ':name' => $data['name'], ':age' => $data['age'], ':desc' => $data['desc'], ':link_photo' => $data['photo'], ':photo_name' => $data['photo_name']));
+    }
+
+    public function getUserById($userId)
+    {
+        $sql = "SELECT * FROM users WHERE user_id = :user_id";
+        $sth = $this->db->prepare($sql);
+        $sth->execute(['user_id' => $userId]);
+        $user = $sth->fetch();
+
+        return $user;
+    }
+
+    public function UpdateUser($data)
+    {
+        //var_dump($data);
+        //exit(); //`PHOTO`= :photo,`PHOTO_NAME`= :photo_name
+        $sql = "UPDATE `users` SET `LOGIN`= :login,`EMAIL`= :email,`PASSWORD`= :password,`NAME`= :name,`AGE`= :age, `DESCRIPTION`= :description WHERE USER_ID = :user_id";
+        $sth = $this->db->prepare($sql);
+        $sth->execute([':user_id' => $data['user_id'], ':login' => $data['login'], ':email' => $data['Email_Parse'], ':name' => $data['name'], ':age' => $data['age'], ':password' => $data['password'], ':description' => $data['desc']]);
+        return $sth;
+    }
+
     /*
     protected $users = [
         'user1', 'user2', 'user3'

@@ -29,6 +29,54 @@ if (!empty($_GET['logout'])) {
     $_SESSION["user"] = null;
     header("Location: /");
 }
+// Админка
+if ($_SERVER['REQUEST_URI'] == "/admin.php") {
+    user();
+    load('core/MainController.php');
+    load('models/User.php');
+    load('controllers/UserController.php');
+    load('core/view.php');
+    $controllers = new UserController();
+    $controllers->admin();
+    return 0;
+}
+
+// Форма админки ввод
+if ($_SERVER['REQUEST_URI'] == "/admin/add") {
+    user();
+    load('core/MainController.php');
+    load('models/User.php');
+    load('controllers/UserController.php');
+    load('core/view.php');
+    $controllers = new UserController();
+    $controllers->adminForm();
+    return 0;
+}
+
+// Отображение формы редактирования пользователя
+if (!empty($_GET['edit_user_id'])) {
+    user();
+    load('core/MainController.php');
+    load('models/User.php');
+    load('controllers/UserController.php');
+    load('core/view.php');
+    $controllers = new UserController();
+
+    if (!empty($_FILES)) {
+       // $controllers->update($_POST);
+    }
+
+    if (!empty($_POST)) {
+        $controllers->update($_POST);
+        return 0;
+    }
+    $controllers->edit($_GET['edit_user_id']);
+    return 0;
+}
+
+
+
+
 
 // Стартовая страница
 if ($_SERVER['REQUEST_URI'] == "/") {
@@ -136,5 +184,5 @@ if (!empty($_GET['remove_user_id'])) {
 }
 
 // такой страницы нет
-header("HTTP/1.0 404 Not Found");
+//header("HTTP/1.0 404 Not Found");
 
